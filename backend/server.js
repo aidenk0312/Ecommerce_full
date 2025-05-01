@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
 require('dotenv').config();
 
@@ -11,6 +12,9 @@ const PORT = process.env.PORT || 5000;
 // 미들웨어
 app.use(cors());
 app.use(express.json());
+
+// Auth 라우트
+app.use('/api/auth', authRoutes);
 
 // Product 라우트 연결
 app.use('/api/products', productRoutes);
