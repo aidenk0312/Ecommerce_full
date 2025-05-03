@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
+const orderRoutes   = require('./routes/orders');
+const paymentRoutes = require('./routes/payments');
 require('dotenv').config();
 
 const app = express();
@@ -19,10 +21,16 @@ app.use('/api/auth', authRoutes);
 // Product 라우트 연결
 app.use('/api/products', productRoutes);
 
+// Orders
+app.use('/api/orders', orderRoutes);
+
 // 기본 라우트
 app.get('/', (req, res) => {
     res.send('🛒 e‑Commerce API is running');
 });
+
+// Payments
+app.use('/api/payments', paymentRoutes);
 
 // MongoDB 연결
 mongoose.connect(process.env.MONGO_URI)
